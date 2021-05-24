@@ -16,7 +16,13 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
  */
 public class Stopwatch {
 
+    /**
+     * seconds
+     */
     private LongProperty seconds = new SimpleLongProperty();
+    /**
+     * hours minutes seconds
+     */
     private StringProperty hhmmss = new SimpleStringProperty();
 
     private Timeline timeline;

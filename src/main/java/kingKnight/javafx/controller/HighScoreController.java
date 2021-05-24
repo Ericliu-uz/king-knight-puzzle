@@ -30,6 +30,9 @@ import org.tinylog.Logger;
 import kingKnight.results.GameResultDao;
 import util.javafx.ControllerHelper;
 
+/**
+ * List the top10 results.
+ */
 public class HighScoreController {
 
     @Inject
@@ -100,6 +103,11 @@ public class HighScoreController {
         highScoreTable.setItems(observableResult);
     }
 
+    /**
+     * Handle restart button.
+     *  @param actionEvent is created after the restart button is clicked.
+     *  @throws IOException when the resource is not available.
+     */
     public void handleRestartButton(ActionEvent actionEvent) throws IOException {
         Logger.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

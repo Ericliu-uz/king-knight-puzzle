@@ -15,6 +15,9 @@ import java.io.IOException;
 
 import org.tinylog.Logger;
 
+/**
+ * Launch interface, player should provide name and then start the game.
+ */
 public class OpeningController {
 
     @Inject
@@ -26,6 +29,11 @@ public class OpeningController {
     @FXML
     private Label errorLabel;
 
+    /**
+     * Check the player's name is given or not and load the game stage.
+     * @param actionEvent is created after the start button is clicked.
+     * @throws IOException when the resource is not available.
+     */
     public void startAction(ActionEvent actionEvent) throws IOException {
         if (playerNameTextField.getText().isEmpty()) {
             errorLabel.setText("Please enter your name!");

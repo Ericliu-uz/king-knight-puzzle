@@ -8,6 +8,7 @@ import javafx.application.Application;
 public class Main {
     /**
      * Start application.
+     * @param args represent argument.
      */
     public static void main(String[] args) {
         Application.launch(KingKnightApplication.class, args);

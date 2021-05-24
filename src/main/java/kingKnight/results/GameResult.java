@@ -51,6 +51,9 @@ public class GameResult {
     @Column(nullable = false)
     private ZonedDateTime created;
 
+    /**
+     * The date time.
+     */
     @PrePersist
     protected void onPersist() {
         created = ZonedDateTime.now();

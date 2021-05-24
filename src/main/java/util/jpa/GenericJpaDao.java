@@ -15,7 +15,13 @@ import java.util.Optional;
  */
 public abstract class GenericJpaDao<T> {
 
+    /**
+     * entity class
+     */
     protected Class<T> entityClass;
+    /**
+     * entity manager
+     */
     protected EntityManager entityManager;
 
     /**

@@ -12,6 +12,9 @@ import org.tinylog.Logger;
 public class KingKnightState {
 
 
+    /**
+     * The array representing the initial configuration of the matrix.
+     */
     public static final int[][] INITIAL = {
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -27,14 +30,27 @@ public class KingKnightState {
     private int kingCol;
     private int knightRow;
     private int knightCol;
+    /**
+     * A array named matrix represent the state of the chessboard.
+     */
     public Cell[][] matrix;
+    /**
+     * A boolean value that decide king/knight's image can move or not.
+     */
     public boolean canChangeImg = true;
 
-
+    /**
+     * Creates an object representing the (original) initial state of the puzzle.
+     */
     public KingKnightState() {
         this(INITIAL);
     }
 
+    /**
+     * Creates a {@code KingKnightState} object that is initialized it with the specified matrix.
+     * @param a an array of size 8x8 representing the initial configuration of the matrix.
+     * @throws IllegalArgumentException if the array does not represent a valid configuration of the matrix.
+     */
     public KingKnightState(int[][] a) {
         if (!isValidMatrix(a)) {
             throw new IllegalArgumentException();
@@ -95,28 +111,32 @@ public class KingKnightState {
 //        matrix[5][3] = Cell.KING;
 //        matrix[5][2] = Cell.KNIGHT;
 //    }
-
-
+    /**
+     * {@return {@code true} if the puzzle is solved, {@code false} otherwise}
+     */
     public boolean isSolved() {
         return matrix[7][6] == Cell.KING || matrix[7][6] == Cell.KNIGHT;
     }
 
-    public int getKingRow() {
-        return kingRow;
-    }
+//    public int getKingRow() {
+//        return kingRow; }
+//
+//    public int getKingCol() {
+//        return kingCol;
+//    }
+//
+//    public int getKnightRow() {
+//        return knightRow;
+//    }
+//
+//    public int getKnightCol() {
+//        return knightCol;
+//    }
 
-    public int getKingCol() {
-        return kingCol;
-    }
-
-    public int getKnightRow() {
-        return knightRow;
-    }
-
-    public int getKnightCol() {
-        return knightCol;
-    }
-
+    /**
+     * getter for matrix.
+     * @return the current matrix
+     */
     public Cell[][] getMatrix() {
         return matrix;
     }
@@ -136,6 +156,13 @@ public class KingKnightState {
 //            return false;
 //    }
 
+    /**
+     * Returns whether the chess piece at the specified position can be moved.
+     *
+     * @param row the col of the cell(in the matrix) to be moved.
+     * @param col the row of the cell(in the matrix) to be moved.
+     * @return {@code true} if the cell at the specified position can be moved, {@code false} otherwise
+     */
     public boolean canMoveToNext(int col, int row) {
         if (matrix[col][row] == Cell.KNIGHT)
             return Math.abs(kingRow - row) == 1 || Math.abs(kingCol - col) == 1 || (Math.abs(kingRow - row) == 1 && Math.abs(kingCol - col) == 1);
@@ -144,7 +171,6 @@ public class KingKnightState {
         else
             return false;
     }
-
 
 //    public void moveToNext( int des_row, int des_col, Cell i) {
 //        System.out.println(this.matrix[knightRow][knightCol]);
@@ -169,8 +195,15 @@ public class KingKnightState {
 //
 //    }
 
+    /**
+     * Returns whether the chess piece at the specified position can be moved.
+     *
+     * @param des_row the row of the cell to be moved.
+     * @param des_col the col of the cell to be moved.
+     * @param i the state(empty/king/knight) of the chess waiting to move.
+     */
     public void moveToNext(int des_row, int des_col, Cell i) {
-        System.out.println(this.matrix[knightRow][knightCol]);
+//        System.out.println(this.matrix[knightRow][knightCol]);
         if (i == Cell.KNIGHT) {
             if (((Math.abs(knightRow - des_row) == 2 && Math.abs(knightCol - des_col) == 1) || (Math.abs(knightRow - des_row) == 1 && Math.abs(knightCol - des_col) == 2))) {
                 Logger.debug("Knight at ({},{}) is moved to ({},{})", knightCol, knightRow, des_col, des_row);
@@ -211,6 +244,10 @@ public class KingKnightState {
         return sb.toString();
     }
 
+    /**
+     * print the state.
+     * @param args argument.
+     */
     public static void main(String[] args) {
         var state = new KingKnightState();
         System.out.println(state);

@@ -81,11 +81,17 @@ public class GameController {
 
     private int oriX, oriY; //oriX, oriY: The location of picked chess.
 
-
+    /**
+     * Set the name of the player.
+     * @param playerName is the name of the player.
+     */
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
+    /**
+     * Initialize the game state: import images and reset game.
+     */
     @FXML
     public void initialize() {
         chessImages = List.of(
@@ -122,71 +128,39 @@ public class GameController {
         stopwatch.start();
     }
 
-    //    private void bindGameStateToUI() {
-//    ImageView king_view = (ImageView) gameBoard.getChildren().get(75);
-    //        king_view.setImage(chessImages.get(gameState.getMatrix()[gameState.getKingRow()][gameState.getKingCol()].getValue()-1));
-//    ImageView knight_view = (ImageView) gameBoard.getChildren().get(76);
-//        knight_view.setImage(chessImages.get(gameState.getMatrix()[gameState.getKnightRow()][gameState.getKnightCol()].getValue()-1));
-//    }
-
-//    private void bindGameStateToUI() {
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                var imageView = (ImageView) gameBoard.getChildren().get(i * 3 + j);
-//                var p = gameState.cubeProperty(i, j);
-//                imageView.imageProperty().bind(
-//                        new ObjectBinding<Image>() {
-//                            {
-//                                super.bind(p);
-//                            }
-//                            @Override
-//                            protected Image computeValue() {
-//                                return cubeImages.get(p.get().getValue());
-//                            }
-//                        }
-//                );
-//            }
-//        }
-//        gameState.solvedProperty().addListener(this::handleSolved);
-//    }
 
 
+    /**
+     * Handle mouse click, first click is picking which chess to move, second click is picking where you want the king/knight to move.
+     *  @param mouseEvent create by the mouse click, and the location of clicked imageView pane can be recorded.
+     */
     @FXML
     public void handleClickOnCell(MouseEvent mouseEvent) {
-//        Integer col = 0;
-//        Integer row = 0;
+
         var col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         if (col == null){col = 0;}
         var row = GridPane.getRowIndex((Node) mouseEvent.getSource());
+        if (row == null){row = 0;}
 //        System.out.println(Cell.KNIGHT);
         if (pickedChess) {
             Logger.debug("Chess ({}, {}) is picked", row, col);
             if (gameState.canMoveToNext(row,col)) {
-                pickedChess = false;
+                Logger.debug("Can move");
                 oriX = row;
                 oriY = col;
+                pickedChess = false;
             } else {
                 Logger.debug("Can not move");
             }
         } else {
-            Logger.debug("Destination ({}, {}) is picked", col, row);
+            Logger.debug("Destination ({}, {}) is picked", row ,col);
             Cell[][] m = gameState.getMatrix();
             gameState.moveToNext(col,row, m[oriX][oriY]);
 
-//            gameState.setMatrix(row, col, m[oriX][oriY]);
-//            gameState.setMatrix(oriX, oriY, Cell.EMPTY);
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    System.out.print(m[i][j]);
-                }
-                System.out.println();
-            }
-
-            steps.set(steps.get() + 1);
-            pickedChess = true;
-
             if (gameState.canChangeImg) {
                 changeImg(oriY, oriX, col, row);
+                steps.set(steps.get() + 1);
+                pickedChess = true;
             }
             handleSolved();
         }
@@ -224,6 +198,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Handle reset button.
+     *  @param actionEvent is created when the reset button is clicked.
+     */
     public void handleResetButton(ActionEvent actionEvent) {
         Logger.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
         Logger.info("Resetting game");
@@ -231,6 +209,11 @@ public class GameController {
         resetGame();
     }
 
+    /**
+     * Handle give up/finish button.
+     *  @param actionEvent is created when the give up button is clicked.
+     *  @throws IOException when the resource is not available.
+     */
     public void handleGiveUpFinishButton(ActionEvent actionEvent) throws IOException {
         var buttonText = ((Button) actionEvent.getSource()).getText();
         Logger.debug("{} is pressed", buttonText);

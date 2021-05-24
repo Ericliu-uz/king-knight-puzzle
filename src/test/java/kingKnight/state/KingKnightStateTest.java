@@ -11,22 +11,6 @@ class KingKnightStateTest {
     }
 
     @Test
-    void getKingRow() {
-    }
-
-    @Test
-    void getKingCol() {
-    }
-
-    @Test
-    void getKnightRow() {
-    }
-
-    @Test
-    void getKnightCol() {
-    }
-
-    @Test
     void getMatrix() {
     }
 
