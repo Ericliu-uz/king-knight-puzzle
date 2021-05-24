@@ -129,7 +129,6 @@ public class GameController {
     }
 
 
-
     /**
      * Handle mouse click, first click is picking which chess to move, second click is picking where you want the king/knight to move.
      *  @param mouseEvent create by the mouse click, and the location of clicked imageView pane can be recorded.
@@ -145,7 +144,6 @@ public class GameController {
         if (pickedChess) {
             Logger.debug("Chess ({}, {}) is picked", row, col);
             if (gameState.canMoveToNext(row,col)) {
-                Logger.debug("Can move");
                 oriX = row;
                 oriY = col;
                 pickedChess = false;
@@ -171,21 +169,7 @@ public class GameController {
         ImageView dest = (ImageView) gameBoard.getChildren().get(destX * 8 + destY);
         dest.setImage(original.getImage());
         original.setImage(null);
-//        Cell[][] matrix = gameState.getMatrix();
-//        int boardLength = matrix.length;
-//        for (int i = 0; i < boardLength; i++) {
-//            for (int j = 0; j < boardLength; j++) {
-//                if (matrix[i][j] == Cell.KING) {
-////                    ImageView king_view = (ImageView) gameBoard.getChildren().get();
-//                    king_view.setImage(chessImages.get(gameState.getMatrix()[gameState.getKingRow()][gameState.getKingCol()].getValue() - 1));
-//                } else if (matrix[i][j] == Cell.KNIGHT) {
-////                    ImageView knight_view = (ImageView) gameBoard.getChildren().get();
-//                    knight_view.setImage(chessImages.get(gameState.getMatrix()[gameState.getKnightRow()][gameState.getKnightCol()].getValue() - 1));
-//                } else {
-//
-//                }
-//            }
-//        }
+
     }
 
     private void handleSolved() {

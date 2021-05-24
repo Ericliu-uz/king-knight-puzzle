@@ -118,20 +118,20 @@ public class KingKnightState {
         return matrix[7][6] == Cell.KING || matrix[7][6] == Cell.KNIGHT;
     }
 
-//    public int getKingRow() {
-//        return kingRow; }
-//
-//    public int getKingCol() {
-//        return kingCol;
-//    }
-//
-//    public int getKnightRow() {
-//        return knightRow;
-//    }
-//
-//    public int getKnightCol() {
-//        return knightCol;
-//    }
+    public int getKingRow() {
+        return kingRow; }
+
+    public int getKingCol() {
+        return kingCol;
+    }
+
+    public int getKnightRow() {
+        return knightRow;
+    }
+
+    public int getKnightCol() {
+        return knightCol;
+    }
 
     /**
      * getter for matrix.
@@ -203,7 +203,7 @@ public class KingKnightState {
      * @param i the state(empty/king/knight) of the chess waiting to move.
      */
     public void moveToNext(int des_row, int des_col, Cell i) {
-//        System.out.println(this.matrix[knightRow][knightCol]);
+
         if (i == Cell.KNIGHT) {
             if (((Math.abs(knightRow - des_row) == 2 && Math.abs(knightCol - des_col) == 1) || (Math.abs(knightRow - des_row) == 1 && Math.abs(knightCol - des_col) == 2))) {
                 Logger.debug("Knight at ({},{}) is moved to ({},{})", knightCol, knightRow, des_col, des_row);
